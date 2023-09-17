@@ -1,0 +1,308 @@
+﻿@using PagedList;
+@using System
+@using PagedList.Mvc;
+@using System.ComponentModel
+@using Search_Filter.Models
+@model IPagedList<Search_Filter.Models.Product>
+
+@{
+    ViewBag.Title = "SearchRecord";
+}
+
+
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<!-- Include jQuery UI after jQuery -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+<head>
+
+</head>
+
+
+
+@using (Html.BeginForm("SearchRecord", "SearchRecord", FormMethod.Get, new { id = "searchForm" }))
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="text-center">
+                <h1>Search by:</h1>
+            </div>
+
+            <div class="text-center mb-3">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#searchModal">
+                    Search Filter
+                </button>
+            </div>
+
+            <div id="searchModal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content p-4">
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <!-- Search Criteria Dropdowns and Textboxes -->
+                                <div class="search-row border p-2 mx-auto mx-auto">
+                                    <select class="search-field form-control" name="criteriaField1">
+                                        <option value="">-- Select option --</option>
+                                        @foreach (var property in typeof(Product).GetProperties())
+                                        {
+                                            var displayNameAttribute = property.GetCustomAttributes(typeof(DisplayNameAttribute), true).FirstOrDefault() as DisplayNameAttribute;
+                                            string displayName = displayNameAttribute != null ? displayNameAttribute.DisplayName : property.Name;
+
+                                            <option value="@property.Name">@displayName</option>
+                                        }
+                                    </select>
+                                    <input type="text" class="search-value" name="criteriaValue1Text" placeholder="Search Value" />
+                                    <input type="date" class="search-value datepicker" name="criteriaValue1Date" placeholder="Select Date" style="display: none;" />
+                                </div>
+
+                                <div class="search-row border p-2 mx-auto mx-auto">
+                                    <select class="search-field form-control" name="criteriaField2">
+                                        <option value="">-- Select option --</option>
+                                        @foreach (var property in typeof(Product).GetProperties())
+                                        {
+                                            var displayNameAttribute = property.GetCustomAttributes(typeof(DisplayNameAttribute), true).FirstOrDefault() as DisplayNameAttribute;
+                                            string displayName = displayNameAttribute != null ? displayNameAttribute.DisplayName : property.Name;
+
+                                            <option value="@property.Name">@displayName</option>
+                                        }
+                                    </select>
+                                    <input type="text" class="search-value" name="criteriaValue2Text" placeholder="Search Value" />
+                                    <input type="date" class="search-value datepicker" name="criteriaValue2Date" placeholder="Select Date" style="display: none;" />
+                                </div>
+
+                                <div class="search-row border p-2 mx-auto mx-auto">
+                                    <select class="search-field form-control" name="criteriaField3">
+                                        <option value="">-- Select option --</option>
+                                        @foreach (var property in typeof(Product).GetProperties())
+                                        {
+                                            var displayNameAttribute = property.GetCustomAttributes(typeof(DisplayNameAttribute), true).FirstOrDefault() as DisplayNameAttribute;
+                                            string displayName = displayNameAttribute != null ? displayNameAttribute.DisplayName : property.Name;
+
+                                            <option value="@property.Name">@displayName</option>
+                                        }
+                                    </select>
+                                    <input type="text" class="search-value" name="criteriaValue3Text" placeholder="Search Value" />
+                                    <input type="date" class="search-value datepicker" name="criteriaValue3Date" placeholder="Select Date" style="display: none;" />
+                                </div>
+
+                                <div class="search-row border p-2 mx-auto mx-auto">
+                                    <select class="search-field form-control" name="criteriaField4">
+                                        <option value="">-- Select option --</option>
+                                        @foreach (var property in typeof(Product).GetProperties())
+                                        {
+                                            var displayNameAttribute = property.GetCustomAttributes(typeof(DisplayNameAttribute), true).FirstOrDefault() as DisplayNameAttribute;
+                                            string displayName = displayNameAttribute != null ? displayNameAttribute.DisplayName : property.Name;
+
+                                            <option value="@property.Name">@displayName</option>
+                                        }
+                                    </select>
+                                    <input type="text" class="search-value" name="criteriaValue4Text" placeholder="Search Value" />
+                                    <input type="date" class="search-value datepicker" name="criteriaValue4Date" placeholder="Select Date" style="display: none;" />
+                                </div>
+
+                                <div class="search-row border p-2 mx-auto mx-auto">
+                                    <select class="search-field form-control" name="criteriaField5">
+                                        <option value="">-- Select option --</option>
+                                        @foreach (var property in typeof(Product).GetProperties())
+                                        {
+                                            var displayNameAttribute = property.GetCustomAttributes(typeof(DisplayNameAttribute), true).FirstOrDefault() as DisplayNameAttribute;
+                                            string displayName = displayNameAttribute != null ? displayNameAttribute.DisplayName : property.Name;
+
+                                            <option value="@property.Name">@displayName</option>
+                                        }
+                                    </select>
+                                    <input type="text" class="search-value" name="criteriaValue5Text" placeholder="Search Value" />
+                                    <input type="date" class="search-value datepicker" name="criteriaValue5Date" placeholder="Select Date" style="display: none;" />
+                                </div>
+
+                                <div class="search-row border p-2 mx-auto mx-auto">
+                                    <select class="search-field form-control" name="criteriaField6">
+                                        <option value="">-- Select option --</option>
+                                        @foreach (var property in typeof(Product).GetProperties())
+                                        {
+                                            var displayNameAttribute = property.GetCustomAttributes(typeof(DisplayNameAttribute), true).FirstOrDefault() as DisplayNameAttribute;
+                                            string displayName = displayNameAttribute != null ? displayNameAttribute.DisplayName : property.Name;
+
+                                            <option value="@property.Name">@displayName</option>
+                                        }
+                                    </select>
+                                    <input type="text" class="search-value" name="criteriaValue6Text" placeholder="Search Value" />
+                                    <input type="date" class="search-value datepicker" name="criteriaValue6Date" placeholder="Select Date" style="display: none;" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="conjunction">Conjunction:</label>
+                                    <select id="conjunction" name="conjunction" class="form-control">
+                                        <option value="AND">AND</option>
+                                        <option value="OR">OR</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="text-center">
+                                    <input class="btn btn-success" type="submit" value="Search" name="submit" id="SearchBtn" />
+
+                                </div>
+
+
+
+                                <input type="hidden" name="criteriaField1" id="criteriaField1" />
+                                <input type="hidden" name="criteriaValue1" id="criteriaValue1" />
+
+                                <input type="hidden" name="criteriaField2" id="criteriaField2" />
+                                <input type="hidden" name="criteriaValue2" id="criteriaValue2" />
+
+                                <input type="hidden" name="criteriaField3" id="criteriaField3" />
+                                <input type="hidden" name="criteriaValue3" id="criteriaValue3" />
+
+                                <input type="hidden" name="criteriaField4" id="criteriaField4" />
+                                <input type="hidden" name="criteriaValue4" id="criteriaValue4" />
+
+                                <input type="hidden" name="criteriaField5" id="criteriaField5" />
+                                <input type="hidden" name="criteriaValue5" id="criteriaValue5" />
+
+                                <input type="hidden" name="criteriaField6" id="criteriaField6" />
+                                <input type="hidden" name="criteriaValue6" id="criteriaValue6" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div id="dropdownContainer"></div>
+
+    <div class="table-responsive">
+        @if (Model == null || Model.Count() == 0)
+        {
+            <h3>No Records Found !</h3>
+        }
+        else
+        {
+            <table id="tbl_table" class="col-md-12 table table-bordered table-dark">
+                <thead class="table-primary">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().ProductId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().ProductName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Size)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Price)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().MfgDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Category)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Size)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MfgDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Category)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+
+    @Html.PagedListPager(Model, i => Url.Action("ViewSearchRecord", "SearchRecord", new { i, search = Request.QueryString["search"], SearchText = Request.QueryString["SearchText"] }))
+    <div class="text-center">
+        <button type="button" class="btn btn-secondary" id="ResetBtn" onclick="clearAndFetchData()">Clear</button>
+    </div>
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+<script>
+    function clearAndFetchData() {
+        // Clear all input fields and dropdown selections
+        $(".search-row border p-2 mx-auto mx-auto select").val('');
+        $(".search-row border p-2 mx-auto mx-auto input").val('');
+
+        // Make an AJAX call to fetch data
+        $.ajax({
+            url: "@Url.Action("ViewSearchRecord", "SearchRecord")", 
+            type: "GET",
+            data: {
+                search: "",
+                i: 1,
+                SearchText: ""
+            },
+            dataType: "html",
+            success: function (data) {
+                // Update the table with the retrieved data
+                $("#searchForm").html(data);
+            },
+            error: function () {
+                // Handle error if necessary
+                alert("Error fetching data");
+            }
+        });
+    }
+
+    // ... Your other JavaScript code ...
+</script>
+<script>
+    $(document).ready(function () {
+        // Add an event listener to each dropdown with class 'search-field'
+        $('.search-field').change(function () {
+            // Check if the selected value is 'MfgDate'
+            if ($(this).val() === 'MfgDate') {
+                // Show the corresponding datepicker input
+                $(this).siblings('.search-value').hide();
+                $(this).siblings('.datepicker').show();
+            } else {
+                // Hide the datepicker input if a different value is selected
+                $(this).siblings('.datepicker').hide(); 
+            }
+        });
+    });
+</script>
+
+
